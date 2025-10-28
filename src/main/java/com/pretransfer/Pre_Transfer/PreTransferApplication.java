@@ -1,4 +1,7 @@
 package com.pretransfer.Pre_Transfer;
+import com.pretransfer.Pre_Transfer.Classes.Student;
+import com.pretransfer.Pre_Transfer.Repository.StudentRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,4 +32,29 @@ public class PreTransferApplication {
 			}
 		};
 	}
+
+    @Bean
+    public CommandLineRunner run(StudentRepository repository) {
+        return args -> {
+            // Clean up existing data
+            repository.deleteAll();
+
+            // Save new users
+            Student student = new Student();
+            student.setStudentId("123456");
+            student.setFirstName("Jim");
+            student.setLastName("Bob");
+            student.setMajor("Computer Science");
+            student.setCreditsCompleted(45);
+            student.setStatus("Committed");
+            repository.save(student);
+            student.setStudentId("123457");
+            student.setFirstName("Tim");
+            student.setLastName("Bab");
+            student.setMajor("Mathematics");
+            student.setCreditsCompleted(60);
+            student.setStatus("Not Committed");
+            repository.save(student);
+        };
+    }
 }
