@@ -41,14 +41,14 @@ public class PreTransferApplication {
 
             // Save new users
             Student student = new Student();
-            student.setStudentId("123456");
+            student.setId("123456");
             student.setFirstName("Jim");
             student.setLastName("Bob");
             student.setMajor("Computer Science");
             student.setCreditsCompleted(45);
             student.setStatus("Committed");
             repository.save(student);
-            student.setStudentId("123457");
+            student.setId("123457");
             student.setFirstName("Tim");
             student.setLastName("Bab");
             student.setMajor("Mathematics");
