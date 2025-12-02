@@ -1,5 +1,7 @@
 package com.pretransfer.Pre_Transfer;
+import com.pretransfer.Pre_Transfer.Classes.Staff;
 import com.pretransfer.Pre_Transfer.Classes.Student;
+import com.pretransfer.Pre_Transfer.Repository.StaffRepository;
 import com.pretransfer.Pre_Transfer.Repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,17 +26,22 @@ public class PreTransferApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/**")
-						.allowedOrigins("http://localhost:5173")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowedHeaders("*")
-						.allowCredentials(true);
+                registry.addMapping("/api/**")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+                registry.addMapping("/auth/**")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
 			}
 		};
 	}
 
     @Bean
-    public CommandLineRunner run(StudentRepository repository) {
+    public CommandLineRunner run(StudentRepository repository, StaffRepository staffRepository) {
         return args -> {
             // Clean up existing data
             repository.deleteAll();
@@ -55,6 +62,14 @@ public class PreTransferApplication {
             student.setCreditsCompleted(60);
             student.setStatus("Not Committed");
             repository.save(student);
+            Staff staff = new Staff();
+            staff.setId("1232");
+            staff.setFirstName("Jim");
+            staff.setLastName("Bob");
+            staff.setEmail("fake@gmail.com");
+            staff.setUsername("username");
+            staff.setPassword("password");
+            staffRepository.save(staff);
         };
     }
 }
