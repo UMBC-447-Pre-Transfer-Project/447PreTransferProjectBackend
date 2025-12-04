@@ -11,13 +11,13 @@ public class Student {
     private String id;
     private String firstName;
     private String lastName;
-    private String major;
+    private String currentMajor;
     private int creditsCompleted;
-    private String status;
+    private String highSchoolStatus;
     private String email;
     //We need to change frontend to send array of classes taken
-    private String classesTaken;
-    private String previousCollege;
-    private String additionalComments;
-    private String committed;
+    private String intendedMajor;
+    private String previousInstitution;
+    private String meetingGoals;
+    private String intendedSemester;
 }
