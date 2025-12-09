@@ -54,6 +54,11 @@ public class PreTransferApplication {
             student.setCurrentMajor("Computer Science");
             student.setCreditsCompleted(45);
             student.setIntendedMajor("Computer Science");
+            student.setEmail("jimbob@gmail.com");
+            student.setHighSchoolStatus("Yes");
+            student.setIntendedSemester("Fall 2026");
+            student.setCurrentInstitution("CCBC");
+            student.setMainCampus(true);
             repository.save(student);
             student.setId("123457");
             student.setFirstName("Tim");
@@ -61,6 +66,11 @@ public class PreTransferApplication {
             student.setCurrentMajor("Mathematics");
             student.setCreditsCompleted(60);
             student.setIntendedMajor("Computer Science");
+            student.setEmail("tim@gmail.com");
+            student.setHighSchoolStatus("Dual Enrolled");
+            student.setIntendedSemester("Fall 2027");
+            student.setCurrentInstitution("Some High School");
+            student.setMainCampus(true);
             repository.save(student);
             Staff staff = new Staff();
             staff.setId("1232");
