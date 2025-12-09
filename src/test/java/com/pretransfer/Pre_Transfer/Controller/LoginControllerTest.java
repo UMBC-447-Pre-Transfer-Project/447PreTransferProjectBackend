@@ -8,18 +8,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 @AutoConfigureMockMvc
+@ExtendWith(SpringExtension.class)
 public class LoginControllerTest {
-    @Resource
+
+    @Autowired
     private final StaffRepository staffRepository;
+    @Autowired
     private final MockMvc mockMvc;
 
     @Autowired
@@ -49,8 +54,16 @@ public class LoginControllerTest {
     void testLogin_Normal() throws Exception {
         this.mockMvc.perform(put("/auth/login")
                         .header("username", "username")
-                        .header("username", "username"))
+                        .header("password", "password"))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+    @Test
+    void testLogin_BadPass() throws Exception {
+        this.mockMvc.perform(put("/auth/login")
+                        .header("username", "username")
+                        .header("password", "wrong"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 }

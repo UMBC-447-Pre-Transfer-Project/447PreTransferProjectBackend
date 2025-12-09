@@ -52,7 +52,7 @@ public class StudentController {
         Assert.hasText(id, "id cannot be null");
         studentDAO.deleteStudentById(id);
         if (studentDAO.getStudentById(id).isPresent()) {
-            return ResponseEntity.ok("Failed to Delete");
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok("Successfully Deleted");
     }

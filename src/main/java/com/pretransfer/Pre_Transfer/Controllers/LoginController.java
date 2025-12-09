@@ -33,7 +33,7 @@ public class LoginController {
         Assert.hasText(username, "username cannot be empty");
         Assert.hasText(password, "password cannot be empty");
         String res = loginDAO.signup(username, password);
-        if (res.equals("")) {
+        if (res.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(res);
