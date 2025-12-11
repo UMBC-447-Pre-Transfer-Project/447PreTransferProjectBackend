@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +26,7 @@ public class LoginController {
         if (res.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.of(Optional.of(res));
+        return ResponseEntity.of(Optional.of("ok"));
     }
 
     @PostMapping
